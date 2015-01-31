@@ -16,7 +16,6 @@ class RezUsage
 	def initialize
     url = "http://reznetusage.azurewebsites.net/?phase=2&appart=627"
     @page = Nokogiri::HTML(open(url))
-    #configure_twitter
   end
 
   def parse_usage
@@ -37,10 +36,10 @@ class TweetBot
 
   def configure_twitter
     @client = Twitter::REST::Client.new do |config|
-    config.consumer_key        = ENV['buI6wS66tpW8lTpHusKpHGYFB']
-    config.consumer_secret     = ENV['xC4aOaxPmn0dsOfQ0D8c5cN91mspISSNGEIHZsANtQ6Cg5XOvB']
-    config.access_token        = ENV['72032743-VZomJ6YSF4rYKUJBU8xmOQncyjBvasEXH0fY1eqHs']
-    config.access_token_secret = ENV['GpYqcaHmHUETFJBbIcxzrOQpRgiSjh1iKMTDuzxfow8yy']
+    config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+    config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+    config.access_token        = ENV['TWITTER_ACCESS_TOKEN']
+    config.access_token_secret = ENV['TWITTER_ACCESS_SECRET']
   end
 
   def send_tweet(msg)
