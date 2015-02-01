@@ -21,7 +21,7 @@ class RezUsage
   def parse_usage
 		
     gb_restant = @page.css('span#ContentPlaceHolder1_lblRestant').text.delete('GB').to_i
-    borne_atteinte = (0..100).step(5).find { |b| b >= gb_restant }
+    borne_atteinte = (0..20).step(5).find { |b| b >= gb_restant }
     if borne_atteinte
       "Vous avez atteint la borne de #{borne_atteinte} GB, il ne vous reste que #{gb_restant} GB" end
     end
