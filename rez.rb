@@ -5,7 +5,8 @@ require 'nokogiri'
 require 'rubygems'
 require 'rufus/scheduler'
 require 'twitter'
-#require 'sinatra'
+require 'sinatra'
+require 'pry'
 
 #if Sinatra::Base.development?
 #  require 'pry'
@@ -36,10 +37,10 @@ class TweetBot
 
   def configure_twitter
     @client = Twitter::REST::Client.new do |config|
-    config.consumer_key        = '****'
+    config.consumer_key        = '*****'
     config.consumer_secret     = '****'
-    config.access_token        = '****'
-    config.access_token_secret = '***'
+    config.access_token        = '******'
+    config.access_token_secret = '****'
   end
 
   def send_tweet(msg, handle)
@@ -52,7 +53,12 @@ class TweetBot
 
 end
 end
-{goku417: {phase: 2, chambre: 626}, maxstonge: {phase: 2, chambre: 627}}.each do |handle, appartement|
+
+get '/' do
+  {goku417: {phase: 2, chambre: 626}, maxstonge: {phase: 2, chambre: 627}}.each do |handle, appartement|
   message =RezUsage.new(appartement).parse_usage
   TweetBot.new.send_tweet(message, handle) if message 
+  p 'test'
+end
+
 end
