@@ -1,7 +1,9 @@
+require 'open-uri'
 require 'json'
 require 'net/http'
 require 'nokogiri'
 require 'rubygems'
+require 'rufus/scheduler'
 require 'twitter'
 require 'sinatra'
 require 'pry'
@@ -35,10 +37,10 @@ class TweetBot
 
   def configure_twitter
     @client = Twitter::REST::Client.new do |config|
-    config.consumer_key        = '*****'
-    config.consumer_secret     = '****'
-    config.access_token        = '******'
-    config.access_token_secret = '****'
+    config.consumer_key        = 'iUVDrhm4HglgjbmCDTZkeWGye'
+    config.consumer_secret     = 'vtbJsVOMU7nItXKDGv2j86mAHmFxahZiL5P3PmU0QwxSfq4u0L'
+    config.access_token        = '3008758335-XGVGX9NzkZmMQM3SQO0d5x02XmaiFqu9HATQV5X'
+    config.access_token_secret = '9Fx0MkMCtoSbu2lB9fPt9q6je6b1Z5qHtFw7H95sefdjJ'
   end
 
   def send_tweet(msg, handle)
@@ -56,7 +58,6 @@ get '/' do
   {goku417: {phase: 2, chambre: 626}, maxstonge: {phase: 2, chambre: 627}}.each do |handle, appartement|
   message =RezUsage.new(appartement).parse_usage
   TweetBot.new.send_tweet(message, handle) if message 
-  p 'test'
 end
 
 end
